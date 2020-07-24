@@ -39,14 +39,16 @@ final class SearchResultsTableViewController: UITableViewController {
         tableView.register(newXib, forCellReuseIdentifier: "cell")
        
     }
-   
+    
+    
     private func setupTableViewBackgroundView() {
         let backgroundViewLabel = UILabel(frame: .zero)
-        backgroundViewLabel.textColor = .darkGray
+        backgroundViewLabel.textColor = .black
+        backgroundViewLabel.backgroundColor = #colorLiteral(red: 0, green: 0.696799651, blue: 0.696799651, alpha: 1)
         backgroundViewLabel.numberOfLines = 0
-        backgroundViewLabel.text = " Oops, No results to show "
+        backgroundViewLabel.text = " Sorry, No results to show "
         backgroundViewLabel.textAlignment = NSTextAlignment.center
-        backgroundViewLabel.font.withSize(20)
+        backgroundViewLabel.font.withSize(30)
         tableView.backgroundView = backgroundViewLabel
     }
 
@@ -54,7 +56,7 @@ final class SearchResultsTableViewController: UITableViewController {
         searchController.searchBar.delegate = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.placeholder = "Search any Topic"
+        searchController.searchBar.placeholder = "Search anything you want ☺️"
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
     }
@@ -74,6 +76,7 @@ final class SearchResultsTableViewController: UITableViewController {
            cell.titleLabel.text = searchResults[indexPath.row]["title"].stringValue
            
            cell.descriptionLabel.text = searchResults[indexPath.row]["terms"]["description"][0].string
+           cell.descriptionLabel.sizeToFit()
            
            if let url = searchResults[indexPath.row]["thumbnail"]["source"].string {
                apiFetcher.fetchImage(url: url, completionHandler: { image, _ in
@@ -85,7 +88,7 @@ final class SearchResultsTableViewController: UITableViewController {
        }
        
       override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-          return 130
+          return 140
           }
     
        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
