@@ -19,7 +19,7 @@ final class SearchResultsTableViewController: UITableViewController {
     didSet {
     tableView.reloadData()
     }
-    }
+}
   
         
     private let searchController = UISearchController(searchResultsController: nil)
